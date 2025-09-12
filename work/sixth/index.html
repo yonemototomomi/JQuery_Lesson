@@ -46,15 +46,19 @@
           method: 'GET',
           dataType: 'json',
           success: function(pokemons) {
+            // console.log("API取得成功:", pokemons);
             // ランダムに1体選ぶ
-            var pokemon = pokemons[Math.floor(Math.random() * pokemons.length)];
+            let pokemon = {
+              name: pokemons.name,
+              img: pokemons.sprites.front_default
+            };
 
             // ポケモンを捕まえる画面のHTMLを文字列で用意
             let encountHtml =
             `
-              <p class="name"></p>
+              <p class="name">${pokemon.name}</p>
               <div>
-                <img class="img" src="" alt="">
+                <img class="img" src="${pokemon.img}" alt="${pokemon.name}">
               </div>
               <div>
                 <button class="btn" id="catch">捕まえる</button>
