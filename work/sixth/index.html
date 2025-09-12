@@ -103,6 +103,20 @@
           }
         });
       });
+
+      $(document).on('click', '[data-js="reset"]', function() {
+        let startHtml = 
+        `
+          <button type="button" class="btn search-btn" id="pokemon_search">ポケモンを探す</button>
+        `;
+        $('#wrapper').html(startHtml);
+      });
+
+      // // ゲット画面内の戻る
+      // $('#pokemoncatch-area [data-js="reset"].btn:not(.mt)').on('click', function() {
+      //   $('#pokemoncatch-area').hide();
+      //   $('#pokemon_search').show();
+      // });
     });
     // $(function() {
     //   $('#pokemon_search').on('click', function() {
