@@ -37,6 +37,40 @@
   <script src="../../common/js/jquery.js"></script>
   <script>
     // 回答はここに書いてね
+    $(function() {
+      // ポケモンを探すボタン
+      $('#pokemon_search').on('click', function() {
+        // APIでポケモン情報を取得
+        $.ajax({
+          url: 'https://pokeapi.co/api/v2/pokemon/1',
+          method: 'GET',
+          dataType: 'json',
+          success: function(pokemons) {
+            // ランダムに1体選ぶ
+            var pokemon = pokemons[Math.floor(Math.random() * pokemons.length)];
+
+            // ポケモンを捕まえる画面のHTMLを文字列で用意
+            let encountHtml =
+            `
+              <p class="name"></p>
+              <div>
+                <img class="img" src="" alt="">
+              </div>
+              <div>
+                <button class="btn" id="catch">捕まえる</button>
+                <button class="btn" data-js="reset">逃げる</button>
+              </div>
+            `;
+
+            // 画面に挿入
+            $('#wrapper').html(encountHtml);
+
+            // ポケモンを探すボタンは非表示
+            $('#pokemon_search').hide();
+          }
+        });
+      });
+    });
     // $(function() {
     //   $('#pokemon_search').on('click', function() {
     //     // ポケモンの候補を用意
