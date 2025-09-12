@@ -82,13 +82,19 @@
           method: 'GET',
           dataType: 'json',
           success: function(pokemonget) {
-            console.log("モンスターボールデータ:", pokemonget);
+
+            let item = pokemonget;
+            
+            let pokeball = {
+              name: item.name,
+              img: item.sprites.default
+            };
 
             let doneHtml =
             `
               <p class="name">ゲットしました</p>
               <div>
-                <img class="img" src="" alt="">
+                <img class="img" src="${pokeball.img}" alt="${pokeball.name}">
               </div>
               <button class="btn" data-js="reset">戻る</button>
             `;
