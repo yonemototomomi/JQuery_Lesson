@@ -74,6 +74,29 @@
           }
         });
       });
+      // ポケモンを捕まえるボタン
+      $('#wrapper').on('click', '#catch', function() {
+        console.log("捕まえるボタンをクリック");
+        $.ajax({
+          url: 'https://pokeapi.co/api/v2/item/4',
+          method: 'GET',
+          dataType: 'json',
+          success: function(pokemonget) {
+            console.log("モンスターボールデータ:", pokemonget);
+
+            let doneHtml =
+            `
+              <p class="name">ゲットしました</p>
+              <div>
+                <img class="img" src="" alt="">
+              </div>
+              <button class="btn" data-js="reset">戻る</button>
+            `;
+
+          $('#wrapper').html(doneHtml);
+          }
+        });
+      });
     });
     // $(function() {
     //   $('#pokemon_search').on('click', function() {
