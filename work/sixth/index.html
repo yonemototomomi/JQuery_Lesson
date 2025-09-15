@@ -26,31 +26,41 @@
           url: `https://pokeapi.co/api/v2/pokemon/${randomId}`,
           method: 'GET',
           dataType: 'json',
-          success: function(pokemons) {
-            // ランダムに1体選ぶ
-            let pokemon = {
-              name: pokemons.name,
-              img: pokemons.sprites.front_default
-            };
+          success: function(pokemon) {
+            $.ajax({
+              url: pokemon.species.url,
+              method: 'GET',
+              dataType: 'json',
+              success: function(species) {
+                let jpName = pokemon.name; // デフォルトは英語名
 
-            // ポケモンを捕まえる画面のHTMLを文字列で用意
-            let encountHtml =
-            `
-              <p class="name">${pokemon.name}</p>
-              <div>
-                <img class="img" src="${pokemon.img}" alt="${pokemon.name}">
-              </div>
-              <div>
-                <button class="btn" id="catch">捕まえる</button>
-                <button class="btn" data-js="reset">逃げる</button>
-              </div>
-            `;
+                for (let n of species.names) {
+                  if (n.language.name === "ja-Hrkt") {
+                    jpName = n.name;
+                    break; // 見つかったらループ終了
+                  }
+                }
 
-            // 画面に挿入
-            $('#wrapper').html(encountHtml);
+                // ポケモンを捕まえる画面のHTML
+                let encountHtml =
+                `
+                  <p class="name">${jpName}</p>
+                  <div>
+                    <img class="img" src="${pokemon.sprites.front_default}" alt="${jpName}">
+                  </div>
+                  <div>
+                    <button class="btn" id="catch">捕まえる</button>
+                    <button class="btn" data-js="reset">逃げる</button>
+                  </div>
+                `;
 
-            // ポケモンを探すボタンは非表示
-            $('#pokemon_search').hide();
+                // 画面に挿入
+                $('#wrapper').html(encountHtml);
+
+                // ポケモンを探すボタンは非表示
+                $('#pokemon_search').hide();
+              }
+            });
           }
         });
       });
@@ -94,6 +104,7 @@
           }
         });
 
+      // 戻るボタンをクリック
       $(document).on('click', '[data-js="reset"]', function() {
         let startHtml = 
         `
