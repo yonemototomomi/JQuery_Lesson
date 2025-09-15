@@ -12,27 +12,6 @@
 <body>
   <div class="wrapper" id="wrapper">
     <button type="button" class="btn search-btn" id="pokemon_search">ポケモンを探す</button>
-    <!-- <div id="pokemon-area" style="display:none;">
-      <p class="name"></p>
-        <div>
-          <img class="img" src="" alt="">
-        </div>
-        <div>
-          <button class="btn" id="catch">捕まえる</button>
-          <button class="btn" data-js="reset">逃げる</button>
-        </div>
-    </div>
-    <div id="pokemoncatch-area" style="display:none;">
-      <p class="name">ゲットしました</p>
-      <div>
-        <img class="img" src="" alt="">
-      </div>
-      <button class="btn" data-js="reset">戻る</button>
-    </div>
-    <div id="escapepokemon-area" style="display:none;">
-      <p class="text">逃げられてしまった...</p>
-      <button class="btn mt" data-js="reset">戻る</button>
-    </div> -->
   </div>
   <script src="../../common/js/jquery.js"></script>
   <script>
@@ -46,7 +25,6 @@
           method: 'GET',
           dataType: 'json',
           success: function(pokemons) {
-            // console.log("API取得成功:", pokemons);
             // ランダムに1体選ぶ
             let pokemon = {
               name: pokemons.name,
@@ -122,55 +100,6 @@
         $('#wrapper').html(startHtml);
       });
     });
-      // // ゲット画面内の戻る
-      // $('#pokemoncatch-area [data-js="reset"].btn:not(.mt)').on('click', function() {
-      //   $('#pokemoncatch-area').hide();
-      //   $('#pokemon_search').show();
-      // });
-    // $(function() {
-    //   $('#pokemon_search').on('click', function() {
-    //     // ポケモンの候補を用意
-    //     var pokemons = ["ピカチュウ", "ゼニガメ", "カビゴン"];
-    //     var pokemon = pokemons[Math.floor(Math.random() * pokemons.length)];
-
-    //     $('#pokemon_search').hide();
-    //     // ポケモンエリアを表示
-    //     // $('.name').text(pokemon.name);
-    //     $('#pokemon-area').show();
-
-    //     // ポケモンの名前を表示
-    //     $('.name').text(pokemon);
-    //   });
-
-    //   $('#catch').on('click', function() {
-    //     // ポケモン表示エリアを消す
-    //     $('#pokemon-area').hide();
-
-    //     // ゲット画面を表示
-    //     $('#pokemoncatch-area').show();
-    //     $('.name').text("ゲットしました");
-    //   });
-      
-    //     // ゲット画面内の戻る
-    //   $('#pokemoncatch-area [data-js="reset"].btn:not(.mt)').on('click', function() {
-    //     $('#pokemoncatch-area').hide();
-    //     $('#pokemon_search').show();
-    //   });
-
-    //     // 逃げるボタン
-    //   $('#pokemon-area [data-js="reset"].btn:not(.mt)').on('click', function() {
-    //     $('#pokemon-area').hide();
-    //     $('#escapepokemon-area').show();
-    //     $('.text').text("逃げられてしまった...");
-    //   });
-
-    //     // 逃げる画面戻るボタン（data-js属性で選択）
-    //   $('#escapepokemon-area [data-js="reset"].mt').on('click', function() {
-    //     $('#pokemoncatch-area').hide();
-    //     $('#escapepokemon-area').hide();
-    //      $('#pokemon_search').show();
-    //   });
-    // });
   </script>
 </body>
 </html>
