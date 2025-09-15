@@ -77,32 +77,42 @@
       // ポケモンを捕まえるボタン
       $('#wrapper').on('click', '#catch', function() {
         console.log("捕まえるボタンをクリック");
-        $.ajax({
-          url: 'https://pokeapi.co/api/v2/item/4',
-          method: 'GET',
-          dataType: 'json',
-          success: function(pokemonget) {
+        let isWin = Math.random() < 0.5;
 
-            let item = pokemonget;
-            
-            let pokeball = {
-              name: item.name,
-              img: item.sprites.default
-            };
+        if (isWin) {
+          $.ajax({
+            url: 'https://pokeapi.co/api/v2/item/4',
+            method: 'GET',
+            dataType: 'json',
+            success: function(pokemonget) {
 
-            let doneHtml =
+              let item = pokemonget;
+              
+              let pokeball = {
+                name: item.name,
+                img: item.sprites.default
+              };
+
+              let winHtml =
+              `
+                <p class="name">ゲットしました</p>
+                <div>
+                  <img class="img" src="${pokeball.img}" alt="${pokeball.name}">
+                </div>
+                <button class="btn" data-js="reset">戻る</button>
+              `;
+              $('#wrapper').html(winHtml);
+            }
+          });
+        } else {
+            let failHtml =
             `
-              <p class="name">ゲットしました</p>
-              <div>
-                <img class="img" src="${pokeball.img}" alt="${pokeball.name}">
-              </div>
-              <button class="btn" data-js="reset">戻る</button>
+              <p class="text">逃げられてしまった...</p>
+              <button class="btn mt" data-js="reset">戻る</button>
             `;
-
-          $('#wrapper').html(doneHtml);
+            $('#wrapper').html(failHtml);
           }
         });
-      });
 
       $(document).on('click', '[data-js="reset"]', function() {
         let startHtml = 
@@ -111,13 +121,12 @@
         `;
         $('#wrapper').html(startHtml);
       });
-
+    });
       // // ゲット画面内の戻る
       // $('#pokemoncatch-area [data-js="reset"].btn:not(.mt)').on('click', function() {
       //   $('#pokemoncatch-area').hide();
       //   $('#pokemon_search').show();
       // });
-    });
     // $(function() {
     //   $('#pokemon_search').on('click', function() {
     //     // ポケモンの候補を用意
