@@ -18,7 +18,7 @@
     // 回答はここに書いてね
     $(function() {
       // ポケモンを探すボタン
-      $('#pokemon_search').on('click', function() {
+      $('#wrapper').on('click', '#pokemon_search', function() {
 
         let randomId = Math.floor(Math.random() * 151) + 1; // 1〜151のポケモン
         // APIでポケモン情報を取得
